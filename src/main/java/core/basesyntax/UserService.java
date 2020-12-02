@@ -7,7 +7,7 @@ public class UserService {
     public int getUserScore(String[] records, String email) {
         int userScope = -1;
         for (String user : records) {
-            if (user.matches(email + ".*") && email.matches(".*[^\\w]")) {
+            if (user.matches(email + ".*") && !email.matches(".*[0-9]")) {
                 String[] userRecords = user.split(":");
                 userScope = Integer.parseInt(userRecords[1]);
             }
