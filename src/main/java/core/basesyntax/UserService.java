@@ -7,14 +7,11 @@ public class UserService {
     public int getUserScore(String[] records, String email) {
         int userScope = -1;
         for (String user : records) {
-            if (user.matches(email + ".*") && !email.matches(".*[0-9]")) {
-                String[] userRecords = user.split(":");
-                userScope = Integer.parseInt(userRecords[1]);
+            String[] userRecords = user.split(":");
+            if (userRecords[0].equals(email) && !email.matches(".*[0-9]")) {
+                return Integer.parseInt(userRecords[1]);
             }
         }
-        if (userScope == -1) {
-            throw new UserNotFoundException("User with given email doesn't exist");
-        }
-        return userScope;
+        throw new UserNotFoundException("User with given email doesn't exist");
     }
 }
